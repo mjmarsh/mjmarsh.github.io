@@ -1,65 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Matthew Marsh by mjmarsh</title>
+<head>
+<meta charset=utf-8 />
+<title>San Luis Obispo County Schools</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<div id='map'></div>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Matthew Marsh</h1>
-        <p>GIS Specialist</p>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1Ijoic2x1Z2lzIiwiYSI6IlB5TlZENVUifQ.Z597Ia0qffZlYcGpbJtzTA';
+var map = L.mapbox.map('map', 'slugis.o5e54ng1');
 
+// Open popup when user mouses over a marker
+map.featureLayer.on('ready', function(e) {
+    var markers = [];
+    this.eachLayer(function(marker) { markers.push(marker); });
+    cycle(markers);
+});
 
-        <p class="view"><a href="https://github.com/mjmarsh">View My GitHub Profile</a></p>
-
-      </header>
-      <section>
-        <h1>
-<a id="education" class="anchor" href="#education" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/Education/">Education</a>
-</h1>
-
-<h1>
-<a id="work-experience" class="anchor" href="#work-experience" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/Work-Experience/">Work Experience</a>
-</h1>
-
-<h1>
-<a id="relevant-coursework" class="anchor" href="#relevant-coursework" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/Relevant-Coursework/">Relevant Coursework</a>
-</h1>
-
-<h1>
-<a id="computer-software" class="anchor" href="#computer-software" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/Computer-Software/">Computer Software</a>
-</h1>
-
-<h1>
-<a id="technical-experience" class="anchor" href="#technical-experience" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/Technical-Experience/">Technical Experience</a>
-</h1>
-
-<h1>
-<a id="relevant-interests" class="anchor" href="#relevant-interests" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/Relevant-Interests/">Relevant Interests</a>
-</h1>
-
-<h1>
-<a id="gis-portfolio" class="anchor" href="#gis-portfolio" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/GIS-Portfolio/">GIS Portfolio</a>
-</h1>
-
-<h1>
-<a id="contact-matthew" class="anchor" href="#contact-matthew" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://mjmarsh.github.io/Contact-Matthew/">Contact Matthew</a>
-</h1>
-      </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+function cycle(markers) {
+    var i = 0;
+    function run() {
+        if (++i > markers.length - 1) i = 0;
+        map.setView(markers[i].getLatLng(), 18);
+        window.setTimeout(run, 6000);
+    }
+    run();
+}
+</script>
+</body>
 </html>
